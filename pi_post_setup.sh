@@ -6,7 +6,7 @@ for (( i=1; i<=$1; i++ ))
 do
     num=$(($i+100))
     ip=192.168.3.$num
-    echo $ip >> ~/mpihostfile
+    echo $ip >> ~/mpihostsfile
     sudo sh -c "echo \"$ip	pi$i\" >> /etc/hosts"
     sshpass -p 'raspberry' scp -o StrictHostKeyChecking=no pi@pi$i:~/.ssh/id_rsa.pub tmp_key
     cat tmp_key >> ~/.ssh/authorized_keys
