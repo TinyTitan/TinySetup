@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-touch ~/mpihostfile
+touch ~/mpihostsfile
 
 for (( i=1; i<=$1; i++ ))
 do
