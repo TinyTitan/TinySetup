@@ -2,7 +2,7 @@
 
 touch ~/mpihostfile
 
-for i in {1..3}
+for (( i=1; i<=$1; i++ ))
 do
     num=$(($i+100))
     ip=192.168.3.$num
@@ -12,7 +12,7 @@ do
     cat tmp_key >> ~/.ssh/authorized_keys
 done
 
-for i in {1..3}
+for (( i=1; i<=$1; i++ ))
 do
     sshpass -p 'raspberry' scp -o StrictHostKeyChecking=no ~/.ssh/authorized_keys pi@pi$i:~/.ssh/authorized_keys
 done
