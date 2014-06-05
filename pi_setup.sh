@@ -20,7 +20,7 @@ for file in \
   /etc/ssh/ssh_host_rsa_key.pub \
   /etc/ssh/ssh_host_dsa_key.pub
 do
-  [ -f $file ] && sudo sed -i "s/pi[0-9]+/$pi_name/" $file
+  [ -f $file ] && sudo sed -i -E "s/pi[0-9]+/$pi_name/" $file
   [ -f $file ] && sudo sed -i "s/raspberrypi/$pi_name/" $file
 done
  
