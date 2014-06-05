@@ -3,7 +3,7 @@
 echo "Enter the node number of this pi followed by [ENTER]: "
 read pi_number
 re='^[0-9]+$'
-if ! [[ $py_number =~ $re ]] ; then
+if ! [[ $pi_number =~ $re ]] ; then
     echo "Error: Please enter integer" >&2; exit 1
 fi
 pi_name = "pi$pi_number"
