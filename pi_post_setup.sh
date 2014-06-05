@@ -10,7 +10,7 @@ fi
 echo "Removing ~/mpihostsfile"
 rm -f ~/mpihostsfile
 echo "Removing ~/.ssh/authorized_keys"
-rm -f ~/.ssh/id_rsa.pub
+rm -f ~/.ssh/authorized_keys
 
 echo "Generating ~/mpihostsfile"
 echo "Generating ~/.ssh/authorized_keys"
