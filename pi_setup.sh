@@ -6,24 +6,24 @@ re='^[0-9]+$'
 if ! [[ $pi_number =~ $re ]] ; then
     echo "Error: Please enter integer" >&2; exit 1
 fi
-pi_name = "pi$pi_number"
+pi_name="pi$pi_number"
 
 echo "Installing system software and updates"
-sudo apt-get -y update
-sudo apt-get -y upgrade
-sudo apt-get -y install vim mpich2 xboxdrv libglew-dev
+#sudo apt-get -y update
+#sudo apt-get -y upgrade
+#sudo apt-get -y install vim mpich2 xboxdrv libglew-dev
 
 echo "Setting computer name"
 for file in \
-  /etc/hostname \
   /etc/hosts \
+  /etc/hostname \
   /etc/ssh/ssh_host_rsa_key.pub \
   /etc/ssh/ssh_host_dsa_key.pub
 do
-  [ -f $file ] && sudo sed -i -E "s/pi[0-9]+/$pi_name/" $file
-  [ -f $file ] && sudo sed -i "s/raspberrypi/$pi_name/" $file
+  [ -f $file ] && sudo sed -i -E "s/pi[0-9]+/$pi_name/" $file > /dev/null 2>&1
+  [ -f $file ] && sudo sed -i "s/raspberrypi/$pi_name/" $file > /dev/null 2>&1
 done
- 
+sudo /etc/init.d/hostname.sh start > /dev/null 2>&1
 sudo hostname $pi_name
 
 echo "Setting network interface" 
