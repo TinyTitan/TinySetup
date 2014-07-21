@@ -11,7 +11,7 @@ pi_name="pi$pi_number"
 echo "Installing system software and updates"
 sudo apt-get -y update
 sudo apt-get -y upgrade
-sudo apt-get -y install vim mpich2 xboxdrv libglew-dev sshpass
+sudo apt-get -y install vim mpich2 xboxdrv libglew-dev sshpass python-mpi4py libav-tools
 
 echo "Setting computer name"
 for file in \
