@@ -33,7 +33,7 @@ pi_name="pi$pi_number"
 echo "Installing system software and updates"
 sudo apt-get -y update
 sudo apt-get -y upgrade
-sudo apt-get -y install vim mpich2 xboxdrv libglew-dev
+sudo apt-get -y install vim mpich2 xboxdrv libglew-dev sshpass
 
 echo "Setting computer name"
 for file in \
