@@ -22,7 +22,6 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #THE SOFTWARE.
 
-
 echo "Enter the total number of Pi nodes in the cluster followed by [ENTER]: "
 read num_pis
 re='^[0-9]+$'
@@ -57,3 +56,9 @@ do
 done
 
 sudo rm tmp_key
+
+echo "Setting GPU memory to 128MB"
+sudo bash ./set_gpu.sh
+
+echo "Rebooting"
+sudo reboot
