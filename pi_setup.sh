@@ -22,6 +22,7 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #THE SOFTWARE.
 
+
 echo "Enter the node number of this pi followed by [ENTER]: "
 read pi_number
 re='^[0-9]+$'
@@ -33,7 +34,15 @@ pi_name="pi$pi_number"
 echo "Installing system software and updates"
 sudo apt-get -y update
 sudo apt-get -y upgrade
-sudo apt-get -y install vim mpich2 xboxdrv libglew-dev sshpass
+sudo apt-get -y install vim mpich2 xboxdrv libglew-dev sshpass libav-tools
+sudo apt-get -y install python-mpi4py python-six python-dateutil python-matplotlib
+
+curLoc = "$PWD"
+cd /home/pi
+git clone https://github.com/richardghirst/PiBits.git
+cd ./PiBits/ServoBlaster/user
+make
+cd $curLoc
 
 echo "Setting computer name"
 for file in \
