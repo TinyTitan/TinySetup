@@ -1,0 +1,28 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+# Print the IP address
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+fi
+
+sudo rmmod xpad
+sudo xboxdrv --mouse --wid 0 --led 2 --config /home/pi/SPH/controller_1.cnf --silent &
+sleep 1
+sudo xboxdrv --mouse --wid 1 --led 3 --config /home/pi/SPH/controller_2.cnf --silent &
+sleep 1
+
+sudo rm -f /home/pi/running /home/pi/script_running
+
+exit 0

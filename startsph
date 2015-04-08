@@ -1,0 +1,66 @@
+#!/bin/bash
+
+if [ ! -f /home/pi/script_running ]
+then
+    touch /home/pi/script_running
+else
+    echo "kiosk script_running already exists"
+    exit 1	
+fi
+
+start_sph() {
+	if [ ! -f /home/pi/running ]
+	then
+		touch /home/pi/running
+		echo
+		echo "Starting SPH"
+		cd /home/pi && su pi -c 'mpirun -f /home/pi/pi_mpihostsfile -n 9 /home/pi/sph.out'
+		EXITCODE=$?
+		rm -f /home/pi/running
+		#clear
+		echo
+		echo "SPH Done"
+
+	else
+		echo
+		echo "Already running either SPH or PiBrot, /home/pi/running exists"
+	fi
+}
+
+start_pibrot() {
+	if [ ! -f /home/pi/running ]
+	then
+		touch /home/pi/running
+		echo
+		echo "Starting PiBrot"
+		cd /home/pi && su pi -c 'mpirun -f /home/pi/pi_mpihostsfile -n 9 /home/pi/pibrot'
+		EXITCODE=$?
+		rm -f /home/pi/running
+		#clear
+		echo
+		echo "PiBrot Done"
+
+	else
+		echo
+		echo "Already running either SPH or PiBrot, /home/pi/running exists"
+	fi
+}
+
+EXITCODE=20
+
+while true
+do
+        sleep 1
+	case "$EXITCODE" in 
+		20)
+			start_sph
+			;;
+		10)
+			start_pibrot
+			;;
+		*)
+			echo "All Done! Last EXITCODE:" $EXITCODE
+                        rm -f /home/pi/script_running
+			exit 1
+	esac
+done
